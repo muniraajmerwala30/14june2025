@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="row mt-5">
                     <div class="col-6 offset-3">
-                        <form onsubmit="sendData(event)">
+                        <form >
                            <input autofocus type="text" name="car_name" class="form-control form control-lg mb-4" placeholder="Enter your Car name"/>
                            <div class="d-grid">
                            <input type="submit" value="Save" class="btn btn-primary btn-lg" onclick="sendData(event)">
@@ -18,7 +18,7 @@
                          </form >
                 <div class="row mt-5">
                     <div class="col-8 offset-2">
-                        <table class="table table-success">
+                        <table class="table table-success" id="mytable">
                             <thead>
                                 <tr class="table-success">
                                     <th>carname</th>
@@ -26,17 +26,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-success">
-                                    <td>
-                                        tatanexon
-
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn btn-success">View</button>
-                                        <button class="btn btn-sm btn btn-info">Edit</button>
-                                        <button class="btn btn-sm btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
+                                
                                 
                                 
                             </tbody>
@@ -52,6 +42,8 @@
            
             <script>
                     //Global variable
+                    //let ceo1 = new ClassName();
+                    var xhttp = new XMLHttpRequest();
                    
                      function sendData(e){ // e is actual argument
                     //object.method
@@ -66,9 +58,9 @@
                        
                         // How you can access class method
                         //object.method(method,url,async,user,psw);
-                        //let ceo1 = new ClassName();
-                         var xhttp = new XMLHttpRequest();
-
+                        
+                           
+                   
                           xhttp.onreadystatechange = function() {
                           if (this.readyState == 4 && this.status == 201) {
                                alert("car saved successfully");
@@ -145,12 +137,41 @@
                 //IIFE
                 // can I access xhr object here
                 //xHttpsetRequestHeader()
-                xHttp.open('GET','http://localhost:1337/api/cars',true);
+                xhttp.open('GET','http://localhost:1337/api/cars',true);
                 //CBFN
-                var xhttp = new XMLHttpRequest();
-                xhTTP.onreadystatechange = function(){
+                 
+                   
+                xhttp.onreadystatechange = function(){
                     if (this.readyState == 4 && this.status == 200){
                         console.log(this.responseText);
+                        console.log(JSON.parse(this.responseText));
+                        var json = JSON.parse(this.responseText);
+                        console.log(json.data);                  
+                             
+
+                     // I want to loop over array of objects
+                     //[]
+                     var tbody=document.getElementById('mytable').querySelector('tbody');
+                     console.log(tbody);
+                     tbody.innerHTML = '';
+
+                     for(variable of json.data){
+                        //code block to be executed
+                        console.log(variable.car_name);
+                        tbody.innerHTML += `
+                        <tr class="table-success">
+                                    <td>
+                                        ${variable.car_name}
+
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn btn-success">View</button>
+                                        <button class="btn btn-sm btn btn-info">Edit</button>
+                                        <button class="btn btn-sm btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                `;
+                             }
 
                     }
                     //To get data
