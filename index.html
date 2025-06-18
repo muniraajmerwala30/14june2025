@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+       <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -42,6 +42,7 @@
            
             <script>
                     //Global variable
+                    let base_url = 'http://localhost:1337';
                     //let ceo1 = new ClassName();
                     var xhttp = new XMLHttpRequest();
                    
@@ -59,7 +60,7 @@
                         // How you can access class method
                         //object.method(method,url,async,user,psw);
                         
-                           
+                           xhttp.open("POST",`${base_url}/api/cars`,true);
                    
                           xhttp.onreadystatechange = function() {
                           if (this.readyState == 4 && this.status == 201) {
@@ -71,7 +72,7 @@
 
                         
 
-                         xhttp.open("POST","http://localhost:1337/api/cars",true);
+                         
                          //object.member
                          //object.property
                          //object.method(aa1,aa2)
@@ -137,7 +138,7 @@
                 //IIFE
                 // can I access xhr object here
                 //xHttpsetRequestHeader()
-                xhttp.open('GET','http://localhost:1337/api/cars',true);
+                xhttp.open('GET',`${base_url}/api/cars`,true);
                 //CBFN
                  
                    
@@ -167,7 +168,7 @@
                                     <td>
                                         <button class="btn btn-sm btn btn-success">View</button>
                                         <button class="btn btn-sm btn btn-info">Edit</button>
-                                        <button class="btn btn-sm btn btn-danger">Delete</button>
+                                        <button class="btn btn-sm btn btn-danger" onclick="deleteElement()">Delete</button>
                                     </td>
                                 </tr>
                                 `;
