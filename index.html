@@ -16,6 +16,9 @@
                            <input type="submit" value="Save" class="btn btn-primary btn-lg" onclick="sendData(event)">
                             </div>
                          </form >
+                    </div>
+                </div>
+            
                 <div class="row mt-5">
                     <div class="col-8 offset-2">
                         <table class="table table-success" id="mytable">
@@ -24,20 +27,21 @@
                                     <th>carname</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                 <tbody>
                                 
                                 
                                 
-                            </tbody>
-                            <tfoot></tfoot>
-                        </table>
-
+                                </tbody>
+                                 <tfoot></tfoot>
+                            </table>
+                        </div>
                     </div>
-                    
                 </div>
-            
-            </div>
+                
+                
+                           
+                        
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
            
             <script>
@@ -63,7 +67,7 @@
                            xhttp.open("POST",`${base_url}/api/cars`,true);
                    
                           xhttp.onreadystatechange = function() {
-                          if (this.readyState == 4 && this.status == 201) {
+                          if (this.readyState == 4 && this.status == 200) {
                                alert("car saved successfully");
                                 
 
@@ -168,7 +172,8 @@
                                     <td>
                                         <button class="btn btn-sm btn btn-success">View</button>
                                         <button class="btn btn-sm btn btn-info">Edit</button>
-                                        <button class="btn btn-sm btn btn-danger" onclick="deleteElement()">Delete</button>
+                                        <button class="btn btn-sm btn btn-danger" onclick="deleteElement(this)">Delete<button>
+                                            
                                     </td>
                                 </tr>
                                 `;
@@ -184,6 +189,17 @@
                 (()=>{
                     console.log('ok');
                 })();
+                //2.fuction defination defination is one time process
+
+                function deleteElement(e){
+                    //console.log(e.closest('tr'));
+                    console.log('I am inside delete element function');
+                    alert("car deleted successfully");
+                    e.closest('tr').remove();
+                    
+                }
             </script>
+
         </body>
+        
         </html>
